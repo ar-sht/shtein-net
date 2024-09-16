@@ -92,6 +92,7 @@ article {
     width: 50%;
     margin: auto;
     margin-top: 2rem;
+    margin-bottom: 4rem;
     padding: 2rem;
 }
 
@@ -114,7 +115,7 @@ a.main-link:hover {
 
 footer {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     text-align: center;
     padding: 1rem;
@@ -130,9 +131,9 @@ div.theme-toggle {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 1rem;
-    width: 10%;
     justify-self: left;
+    width: 150px;
+    margin-left: 3rem;
 }
 
 svg.toggle-icon {
@@ -187,6 +188,15 @@ input:checked + .slider:before {
     transform: translateX(26px);
 }
 
+div.font-select {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 200px;
+    justify-self: right;
+    margin-right: 3rem;
+}
+
 select#font-select {
     font-family: inherit;
     font-size: 1rem;
@@ -204,24 +214,9 @@ select#font-select:focus {
     outline: none;
 }
 
-select#font-select div#default {
-    font-family: 'Departure Mono';
-}
-
-select#font-select div#sans {
-    font-family: 'Lato';
-}
-
-select#font-select div#serif {
-    font-family: 'Georgia';
-}
-
-select#font-select div#mono {
-    font-family: 'Trebuchet MS';
-}
-
-select#font-select div#courier {
-    font-family: 'Courier New';
+select#font-select option {
+    background-color: var(--bg-color);
+    color: var(--fg-color);
 }
 
 @font-face {
