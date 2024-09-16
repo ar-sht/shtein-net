@@ -1,17 +1,6 @@
 document.documentElement.style.setProperty('transition', 'all 0.5s ease');
 
-function reloadCSS()
-{
-    var links = document.getElementsByTagName("link");
-    for (var cl in links)
-    {
-        var link = links[cl];
-        if (link.rel === "stylesheet")
-            link.href += "";
-    }
-}
-
-toggleSwitch = document.querySelector('.switch input[type="checkbox"]');
+toggleSwitches = document.querySelectorAll('.switch input[type="checkbox"]');
 
 function applyLightModeColors() {
     document.documentElement.style.setProperty('--primary-color', '#466365');
@@ -37,12 +26,14 @@ function applyThemeColors(theme) {
     }
 }
 
-toggleSwitch.addEventListener('change', (e) => {
-    const theme = e.target.checked ? 'light' : 'dark';
-    applyThemeColors(theme);
-    localStorage.setItem('theme', theme);
-    // reloadCSS();
-}, false);
+toggleSwitches.forEach(toggleSwitch => {
+    toggleSwitch.addEventListener('change', (e) => {
+        const theme = e.target.checked ? 'light' : 'dark';
+        applyThemeColors(theme);
+        localStorage.setItem('theme', theme);
+    }, false);
+});
+
 
 const fonts = {
     'default': 'Departure Mono',
@@ -52,11 +43,22 @@ const fonts = {
     'courier': 'Courier New'
 }
 
-fontSelector = document.getElementById('font-select');
+fontSelectors = document.querySelectorAll('#font-select');
 
-fontSelector.addEventListener('change', (e) => {
-    const fontSelection = e.target.value;
-    const font = fonts[fontSelection];
-    document.documentElement.style.setProperty('--font-family', font);
-    localStorage.setItem('font', font);
+fontSelectors.forEach(fontSelector => {
+    fontSelector.addEventListener('change', (e) => {
+        const fontSelection = e.target.value;
+        const font = fonts[fontSelection];
+        document.documentElement.style.setProperty('--font-family', font);
+        localStorage.setItem('font', font);
+    })
+});
+
+
+navToggle = document.querySelector('.navbar-toggle');
+
+navToggle.addEventListener('click', (e) => {
+    console.log('hello')
+    const menu = document.querySelector('.mobile-menu');
+    menu.classList.toggle('show');
 })
