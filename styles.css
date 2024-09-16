@@ -1,18 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
 :root {
     --primary-color: #a2dfe3;
     --secondary-color: #83acba;
-    --dark-color: #343a40;
-    --light-color: #f4f4f4;
+    --bg-color: #343a40;
+    --fg-color: #f4f4f4;
     --danger-color: #dc3545;
+    --font-family: 'Departure Mono';
+}
+
+html {
+    transition: all 0.4s;
 }
 
 body {
-    font-family: 'Trebuchet MS', sans-serif;
+    font-family: var(--font-family);
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: var(--dark-color);
-    color: var(--dark-color);
+    background-color: var(--bg-color);
+    color: var(--bg-color);
+    transition: inherit;
 }
 
 nav {
@@ -20,7 +28,8 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem 2rem;
-    background-color: var(--dark-color);
+    background-color: var(--bg-color);
+    transition: inherit;
 }
 
 ul.navbar {
@@ -36,7 +45,7 @@ li.nav-item {
 }
 
 a.nav-link {
-    color: var(--light-color);
+    color: var(--fg-color);
     font-size: 1.2rem;
     text-decoration: none;
 }
@@ -63,7 +72,7 @@ header {
     margin-top: 5rem;
     text-align: center;
     padding: 2rem;
-    background-color: var(--light-color);
+    background-color: var(--fg-color);
     transform: skew(-20deg, -5deg);
 }
 
@@ -89,7 +98,7 @@ article {
 p.main-text {
     font-size: 1.2rem;
     margin-bottom: 1rem;
-    color: var(--light-color);
+    color: var(--fg-color);
     margin-top: 3rem;
 }
 
@@ -104,11 +113,118 @@ a.main-link:hover {
 }
 
 footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     text-align: center;
     padding: 1rem;
-    background-color: var(--dark-color);
-    color: var(--light-color);
+    background-color: var(--bg-color);
+    color: var(--fg-color);
     position: fixed;
     bottom: 0;
     width: 100%;
+    transition: inherit;
+}
+
+div.theme-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    width: 10%;
+    justify-self: left;
+}
+
+svg.toggle-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: var(--fg-color);
+}
+
+/* Toggle Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--fg-color);
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: var(--bg-color);
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--fg-color);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+select#font-select {
+    font-family: inherit;
+    font-size: 1rem;
+    border: none;
+    background-color: inherit;
+    color: inherit;
+    transition: inherit;
+}
+
+select#font-select:hover {
+    cursor: pointer;
+}
+
+select#font-select:focus {
+    outline: none;
+}
+
+select#font-select div#default {
+    font-family: 'Departure Mono';
+}
+
+select#font-select div#sans {
+    font-family: 'Lato';
+}
+
+select#font-select div#serif {
+    font-family: 'Georgia';
+}
+
+select#font-select div#mono {
+    font-family: 'Trebuchet MS';
+}
+
+select#font-select div#courier {
+    font-family: 'Courier New';
+}
+
+@font-face {
+    font-family: 'Departure Mono';
+    src: url('fonts/DepartureMono-Regular.woff') format('woff');
 }
