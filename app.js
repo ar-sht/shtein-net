@@ -43,7 +43,7 @@ const fonts = {
     'courier': 'Courier New'
 }
 
-fontSelectors = document.querySelectorAll('#font-select');
+fontSelectors = document.querySelectorAll('select.font-select');
 
 fontSelectors.forEach(fontSelector => {
     fontSelector.addEventListener('change', (e) => {
@@ -58,7 +58,6 @@ fontSelectors.forEach(fontSelector => {
 navToggle = document.querySelector('.navbar-toggle');
 
 navToggle.addEventListener('click', (e) => {
-    console.log('hello')
     const menu = document.querySelector('.mobile-menu');
     menu.classList.toggle('show');
 })
