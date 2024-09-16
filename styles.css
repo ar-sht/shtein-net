@@ -1,0 +1,114 @@
+:root {
+    --primary-color: #a2dfe3;
+    --secondary-color: #83acba;
+    --dark-color: #343a40;
+    --light-color: #f4f4f4;
+    --danger-color: #dc3545;
+}
+
+body {
+    font-family: 'Trebuchet MS', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: var(--dark-color);
+    color: var(--dark-color);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    background-color: var(--dark-color);
+}
+
+ul.navbar {
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    align-items: center;
+    justify-self: right;
+}
+
+li.nav-item {
+    margin-right: 2rem;
+}
+
+a.nav-link {
+    color: var(--light-color);
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+a.nav-link:hover {
+    color: var(--primary-color);
+    transition: all 0.2s;
+}
+
+a.shtein-link {
+    color: var(--primary-color);
+    font-size: 2rem;
+}
+
+a.shtein-link:hover {
+    color: var(--secondary-color);
+    transform: skew(-10deg, -10deg);
+    transition: all 0.4s;
+}
+
+header {
+    width: 50%;
+    margin: auto;
+    margin-top: 5rem;
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--light-color);
+    transform: skew(-20deg, -5deg);
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    transform: skew(20deg, 0);
+}
+
+h6 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    transform: skew(20deg, 0);
+}
+
+article {
+    width: 50%;
+    margin: auto;
+    margin-top: 2rem;
+    padding: 2rem;
+}
+
+p.main-text {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--light-color);
+    margin-top: 3rem;
+}
+
+a.main-link {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a.main-link:hover {
+    color: var(--secondary-color);
+    transition: all 0.2s;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
