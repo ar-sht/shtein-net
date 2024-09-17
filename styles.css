@@ -146,10 +146,23 @@ h6 {
 
 article {
     width: 50%;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 2rem;
     margin-bottom: 4rem;
     padding: 2rem;
+}
+
+div.portrait {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+svg.portrait {
+    fill: var(--fg-color);
+    width: 50%;
+    height: 50%;
 }
 
 p.main-text {
@@ -157,6 +170,15 @@ p.main-text {
     margin-bottom: 1rem;
     color: var(--fg-color);
     margin-top: 3rem;
+}
+
+p.caption {
+    margin-top: 1.5rem;
+    font-size: 0.8rem;
+    color: var(--fg-color);
+    font-style: italic;
+    align-self: center;
+    text-align: center;
 }
 
 a.main-link {
