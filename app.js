@@ -39,7 +39,7 @@ const fonts = {
     'default': 'Departure Mono',
     'sans-serif': 'Lato',
     'serif': 'Georgia',
-    'monospace': 'Trebuchet MS',
+    'monospace': 'Source Code Pro',
     'courier': 'Courier New'
 }
 
