@@ -2,9 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 
 :root {
-    --primary-color: #a2dfe3;
-    --secondary-color: #83acba;
-    --bg-color: #343a40;
+    --primary-color: #23c8de;
+    --secondary-color: #0f98fa;
+    --bg-color: #071621;
     --fg-color: #f4f4f4;
     --danger-color: #dc3545;
     --font-family: 'Departure Mono';

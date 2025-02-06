@@ -31,18 +31,18 @@ window.onload = () => {
 }
 
 function applyLightModeColors() {
-    document.documentElement.style.setProperty('--primary-color', '#466365');
-    document.documentElement.style.setProperty('--secondary-color', '#40555c');
+    document.documentElement.style.setProperty('--primary-color', '#0f98fa');
+    document.documentElement.style.setProperty('--secondary-color', '#23c8de');
     document.documentElement.style.setProperty('--bg-color', '#f4f4f4');
-    document.documentElement.style.setProperty('--fg-color', '#343a40');
+    document.documentElement.style.setProperty('--fg-color', '#071621');
     localStorage.setItem('theme', 'light');
     // Add more properties as needed
 }
 
 function applyDarkModeColors() {
-    document.documentElement.style.setProperty('--primary-color', '#a2dfe3');
-    document.documentElement.style.setProperty('--secondary-color', '#83acba');
-    document.documentElement.style.setProperty('--bg-color', '#343a40');
+    document.documentElement.style.setProperty('--primary-color', '#23c8de');
+    document.documentElement.style.setProperty('--secondary-color', '#0f98fa');
+    document.documentElement.style.setProperty('--bg-color', '#071621');
     document.documentElement.style.setProperty('--fg-color', '#f4f4f4');
     localStorage.setItem('theme', 'dark');
     // Add more properties as needed
