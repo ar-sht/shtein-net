@@ -5,7 +5,7 @@ const fontSelectors = document.querySelectorAll('select.font-select');
 const navToggle = document.querySelector('.navbar-toggle');
 
 const fonts = {
-    'default': 'Departure Mono',
+    'default': 'Lora',
     'sans-serif': 'Lato',
     'serif': 'Georgia',
     'monospace': 'Source Code Pro',
