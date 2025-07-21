@@ -31,7 +31,7 @@ window.onload = () => {
 }
 
 function applyLightModeColors() {
-    document.documentElement.style.setProperty('--primary-color', '#466365');
+    document.documentElement.style.setProperty('--primary-color', '#769395');
     document.documentElement.style.setProperty('--secondary-color', '#40555c');
     document.documentElement.style.setProperty('--bg-color', '#f4f4f4');
     document.documentElement.style.setProperty('--fg-color', '#343a40');

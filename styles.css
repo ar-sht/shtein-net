@@ -154,12 +154,13 @@ div.portrait {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 3rem;
 }
 
 svg.portrait {
     fill: var(--fg-color);
-    width: 50%;
-    height: 50%;
+    width: 40%;
+    height: 40%;
 }
 
 video {
@@ -172,6 +173,7 @@ p.main-text {
     margin-bottom: 1rem;
     color: var(--fg-color);
     margin-top: 3rem;
+    line-height: 1.2;
 }
 
 p.caption {
