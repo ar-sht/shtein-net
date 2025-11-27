@@ -243,6 +243,13 @@
     border-color: var(--bg-color);
 }
 
+.cfb-download-all-btn {
+    padding: 0.55rem 1rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
 .status {
     min-height: 1.25rem;
     font-size: 0.9rem;

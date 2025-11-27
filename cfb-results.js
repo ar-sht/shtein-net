@@ -191,6 +191,8 @@
 
         const COLUMN_WIDTHS = [18, 12, 16, 10, 14, 24, 30, 10, 12, 16, 24];
         let xlsxLoader = null;
+        const TEAM_COOKIE_NAME = 'winsipedia-team-selection';
+        const TEAM_COOKIE_MAX_AGE = 60 * 60 * 24 * 90;
 
         const combobox = document.querySelector('[data-combobox]');
         if (!combobox) return;
@@ -202,8 +204,9 @@
         const fetchBtn = document.getElementById('fetch-btn');
         const statusEl = document.getElementById('status');
         const downloadList = document.getElementById('download-list');
+        const downloadAllBtn = document.getElementById('download-all-btn');
 
-        if (!teamOptions || !teamToggle || !fetchBtn || !statusEl || !downloadList || !chipContainer || !teamSearchInput) {
+        if (!teamOptions || !teamToggle || !fetchBtn || !statusEl || !downloadList || !chipContainer || !teamSearchInput || !downloadAllBtn) {
             return;
         }
 
@@ -216,6 +219,59 @@
             selectedTeams: [],
             downloadEntries: []
         };
+
+        function getCookie(name) {
+            const cookieString = document.cookie || '';
+            const entries = cookieString.split(';');
+            const target = `${name}=`;
+            for (const entry of entries) {
+                const trimmed = entry.trim();
+                if (trimmed.startsWith(target)) {
+                    return trimmed.slice(target.length);
+                }
+            }
+            return null;
+        }
+
+        function readTeamsFromCookie() {
+            try {
+                const encoded = getCookie(TEAM_COOKIE_NAME);
+                if (!encoded) return [];
+                const parsed = JSON.parse(decodeURIComponent(encoded));
+                if (!Array.isArray(parsed)) return [];
+                const seen = new Set();
+                const valid = [];
+                parsed.forEach(raw => {
+                    if (typeof raw !== 'string') return;
+                    const match = TEAMS.find(team => team.toLowerCase() === raw.toLowerCase());
+                    if (match && !seen.has(match)) {
+                        seen.add(match);
+                        valid.push(match);
+                    }
+                });
+                return valid;
+            } catch (error) {
+                console.warn('Unable to read saved team selections from cookie.', error);
+                return [];
+            }
+        }
+
+        function persistSelectedTeams() {
+            try {
+                const payload = encodeURIComponent(JSON.stringify(comboboxState.selectedTeams));
+                document.cookie = `${TEAM_COOKIE_NAME}=${payload}; path=/; max-age=${TEAM_COOKIE_MAX_AGE}; SameSite=Lax`;
+            } catch (error) {
+                console.warn('Unable to persist team selections to cookie.', error);
+            }
+        }
+
+        function hydrateTeamsFromCookie() {
+            const saved = readTeamsFromCookie();
+            if (saved.length) {
+                comboboxState.selectedTeams = saved;
+                persistSelectedTeams();
+            }
+        }
 
         const getOptions = () =>
             Array.from(teamOptions.querySelectorAll('.cfb-combobox__option[data-value]'));
@@ -412,11 +468,13 @@
             }
             comboboxState.selectedTeams.push(teamName);
             renderChipPills();
+            persistSelectedTeams();
         }
 
         function removeTeam(teamName) {
             comboboxState.selectedTeams = comboboxState.selectedTeams.filter(t => t !== teamName);
             renderChipPills();
+            persistSelectedTeams();
         }
 
         function handleTeamSelection(teamName) {
@@ -699,6 +757,34 @@
             }
         }
 
+        function updateDownloadAllButton(entries = comboboxState.downloadEntries) {
+            if (!downloadAllBtn) return;
+            const hasDownloads = Array.isArray(entries) && entries.length > 0;
+            downloadAllBtn.disabled = !hasDownloads;
+            downloadAllBtn.setAttribute('aria-disabled', hasDownloads ? 'false' : 'true');
+        }
+
+        function triggerSingleDownload(url, filename) {
+            const anchor = document.createElement('a');
+            anchor.href = url;
+            anchor.download = filename;
+            anchor.style.display = 'none';
+            document.body.appendChild(anchor);
+            anchor.click();
+            document.body.removeChild(anchor);
+        }
+
+        function handleDownloadAll() {
+            if (!comboboxState.downloadEntries.length) return;
+            comboboxState.downloadEntries.forEach((entry, index) => {
+                const extension = entry.format === 'excel' ? 'xlsx' : 'csv';
+                const filename = `${entry.slug}_games.${extension}`;
+                setTimeout(() => {
+                    triggerSingleDownload(entry.url, filename);
+                }, index * 250);
+            });
+        }
+
         function renderDownloadList(entries) {
             downloadList.innerHTML = '';
             entries.forEach(({ team, slug, url, format }) => {
@@ -724,6 +810,7 @@
                 li.append(meta, anchor);
                 downloadList.appendChild(li);
             });
+            updateDownloadAllButton(entries);
         }
 
         async function handleFetch() {
@@ -736,6 +823,8 @@
             setStatus("Fetching selections...");
 
             try {
+                comboboxState.downloadEntries = [];
+                renderDownloadList([]);
                 resetDownloadUrls();
                 const downloads = [];
                 const workbookMime = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
@@ -798,6 +887,9 @@
             handleFetch();
         });
 
+        downloadAllBtn.addEventListener('click', handleDownloadAll);
+
+        hydrateTeamsFromCookie();
         filterTeams('');
         renderChipPills();
         renderDownloadList([]);
