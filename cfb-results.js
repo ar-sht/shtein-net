@@ -278,7 +278,7 @@
 
         function normalizeTeamToSlug(name) {
             let slug = name.trim().toLowerCase();
-            slug = slug.replace(/&/g, "and");
+            slug = slug.replace(/&/g, "");
             slug = slug.replace(/'/g, "");
             slug = slug.replace(/\./g, "");
             slug = slug.replace(/\(/g, "").replace(/\)/g, "");
