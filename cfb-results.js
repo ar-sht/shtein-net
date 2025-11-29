@@ -180,6 +180,7 @@
             "Year",
             "Record",
             "Result",
+            "SP",
             "Date",
             "Opponent",
             "OpponentURL",
@@ -189,7 +190,7 @@
             "Notes"
         ];
 
-        const COLUMN_WIDTHS = [18, 12, 16, 10, 14, 24, 30, 10, 12, 16, 24];
+        const COLUMN_WIDTHS = [18, 12, 16, 8, 6, 14, 24, 30, 10, 12, 16, 24];
         let xlsxLoader = null;
         const TEAM_COOKIE_NAME = 'winsipedia-team-selection';
         const TEAM_COOKIE_MAX_AGE = 60 * 60 * 24 * 90;
@@ -703,14 +704,25 @@
                     const tds = tr.querySelectorAll("td");
                     if (tds.length < 6) return;
 
-                    const result = tds[0].textContent.trim();
+                    const rawResult = tds[0].textContent.trim();
+                    let sp = "";
+                    if (rawResult.includes("†")) {
+                        sp = "V";
+                    } else if (rawResult.includes("*")) {
+                        sp = "F";
+                    }
+                    const resultMatch = rawResult.match(/[WL]/i);
+                    const result = resultMatch ? resultMatch[0].toUpperCase() : "";
                     const date = tds[1].textContent.trim();
 
                     const oppCell = tds[2];
                     const oppLink = oppCell.querySelector("a");
-                    const opponentName = oppLink
-                        ? oppLink.textContent.trim()
-                        : oppCell.textContent.trim();
+                    const primaryOppSpan = oppCell.querySelector("span");
+                    const opponentName = primaryOppSpan
+                        ? primaryOppSpan.textContent.trim()
+                        : oppLink
+                            ? oppLink.textContent.trim()
+                            : oppCell.textContent.trim();
                     const opponentUrl = oppLink ? oppLink.href : "";
 
                     const scoreText = tds[3].textContent.trim();
@@ -732,6 +744,7 @@
                         Year: seasonYear,
                         Record: seasonRecord,
                         Result: result,
+                        SP: sp,
                         Date: date,
                         Opponent: opponentName,
                         OpponentURL: opponentUrl,
