@@ -711,7 +711,7 @@
                     } else if (rawResult.includes("*")) {
                         sp = "F";
                     }
-                    const resultMatch = rawResult.match(/[WL]/i);
+                    const resultMatch = rawResult.match(/[WLT]/i);
                     const result = resultMatch ? resultMatch[0].toUpperCase() : "";
                     const date = tds[1].textContent.trim();
 
