@@ -207,7 +207,7 @@ p.main-text {
     margin-bottom: 1rem;
     color: var(--fg-color);
     margin-top: 3rem;
-    line-height: 1.2;
+    line-height: 1.25;
 }
 
 p.caption {
@@ -226,12 +226,19 @@ p.tiny {
 
 a.main-link {
     color: var(--primary-color);
+}
+
+div.contact a.main-link {
     text-decoration: none;
 }
 
 a.main-link:hover {
-    color: var(--secondary-color);
+    opacity: 0.8;
     transition: all 0.2s;
+}
+
+a.main-link:active {
+    opacity: 0.5;
 }
 
 footer {
